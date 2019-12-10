@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.serbadk.gceclub.views.settings.DashboardViewModel" />
+
+        <variable
+            name="profileImageClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="coverImageClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/dashboard_coordinateLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/loadingGrey"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".views.settings.DashboardFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nesScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    isShow="@{viewmodel.isToShowProgressBar()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:indeterminate="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:indeterminateTintMode="src_atop" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/coverImageViewLay"
+                    app:layout_constraintDimensionRatio="W,2:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/progressBar"
+                    android:foreground="@drawable/playlist_folder_background"
+                    android:layout_height="300dp">
+
+                <ImageView
+                    android:id="@+id/coverImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/loadingGrey"
+                    android:contentDescription="@string/file_big_image"
+                    android:onClick="@{coverImageClickListener}"
+                    android:scaleType="fitXY"
+                    tools:src="@drawable/dumy_img" />
+                </FrameLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userProfileView"
+                    loadImage="@{viewmodel.dashboardDetails.user.profileImageUrl}"
+                    android:layout_width="@dimen/size_100dp"
+                    android:layout_height="@dimen/size_100dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="@id/coverImageViewLay"
+                    app:layout_constraintStart_toStartOf="@id/coverImageViewLay"
+                    app:layout_constraintTop_toTopOf="@id/coverImageViewLay"
+                    tools:src="@drawable/avatar_girl"
+                    android:onClick="@{profileImageClickListener}" />
+
+                <TextView
+                    android:id="@+id/userNameView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{viewmodel.dashboardDetails.user.name}"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userProfileView"
+                    tools:text="Avatar" />
+
+                <TextView
+                    android:id="@+id/userLocationView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:drawableStart="@drawable/ic_location"
+                    app:drawableTint="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:drawablePadding="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userNameView"
+                    tools:text="Avatar" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    isGone="@{viewmodel.noStatusPanelItems}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="@+id/coverImageViewLay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/coverImageViewLay"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:listitem="@layout/list_dashboard_items" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/errorView"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="24sp"
+                    android:visibility="gone"
+                    tools:text="Please enable a widget"
+                    android:text="Please enable a widget"
+                    android:gravity="center"
+                    android:layout_margin="10dp" />
+
+                <TextView
+                    android:id="@+id/weeklyReportTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Weekly Report"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/toggleButtonGroup"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/errorView" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleButtonGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:singleSelection="true"
+                    app:layout_constraintBottom_toBottomOf="@id/weeklyReportTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/weeklyReportTextView" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/lineChartLay"
+                    android:background="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weeklyReportTextView">
+
+                    <TextView
+                        android:id="@+id/lineChartNoData"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:text="No Purchases Report Available!"
+                        android:textSize="24sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/barChartLay"
+                    android:background="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weeklyReportTextView">
+
+                    <TextView
+                        android:id="@+id/barChartNoData"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:text="No Sales Report Available!"
+                        android:textSize="24sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

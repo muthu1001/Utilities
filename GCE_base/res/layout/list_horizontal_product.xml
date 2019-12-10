@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="itemClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="viewPriceClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="product"
+            type="com.serbadk.gceclub.model.Product" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{itemClickListener}"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        tools:ignore="ContentDescription">
+
+        <FrameLayout
+            android:id="@+id/framelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:background="@android:color/white"
+                loadImage="@{product.getImageUrl()}"
+                roundedCorners="@{true}"
+                cornerRadius="@{48}"
+                tools:srcCompat="@drawable/dumy_img" />
+
+
+            <com.serbadk.gceclub.widgets.FontIconView
+                android:id="@+id/fileTypeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                tools:text="\uf001"
+                android:padding="4dp"
+                android:layout_margin="5dp"
+                android:text="@{product.contentType.getIcon()}" />
+        </FrameLayout>
+
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="2"
+            android:text="@{product.contentTitle}"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/framelayout"
+            tools:text="Odisha remains backward due to inaction of Patnaik government: Shah" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/viewPriceButton"
+            style="@style/AppTheme.ViewPriceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewPriceClickListener}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

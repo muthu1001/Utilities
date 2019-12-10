@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="duration"
+            type="com.serbadk.gceclub.model.Duration" />
+
+        <variable
+            name="isWebinarOver"
+            type="Boolean" />
+
+        <variable
+            name="priceText"
+            type="String" />
+
+        <variable
+            name="addToCartClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="addToBookmarkClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomSheet"
+        android:paddingBottom="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{name}"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="This is the product name viewing in price sheet"/>
+
+        <TextView
+            android:id="@+id/dateTimeView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/nameView"
+            tools:text="Date &amp; Time"/>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Price : "
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/dateTimeView" />
+
+        <TextView
+            android:id="@+id/priceView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:text="@{priceText}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/price"
+            app:layout_constraintStart_toEndOf="@id/price"
+            tools:text="RM 0.0" />
+
+        <include
+            android:id="@+id/daysLayout"
+            layout="@layout/time_view"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:data="@{duration.days}"
+            app:isLayoutAvailable="@{!isWebinarOver}"
+            app:layout_constraintEnd_toStartOf="@id/hoursLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price"
+            app:type="@{`Days`}" />
+
+        <include
+            android:id="@+id/hoursLayout"
+            layout="@layout/time_view"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:data="@{duration.hours}"
+            app:isLayoutAvailable="@{!isWebinarOver}"
+            app:layout_constraintEnd_toStartOf="@id/minutesLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/daysLayout"
+            app:layout_constraintTop_toBottomOf="@id/price"
+            app:type="@{`Hours`}" />
+
+        <include
+            android:id="@+id/minutesLayout"
+            layout="@layout/time_view"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:data="@{duration.minutes}"
+            app:isLayoutAvailable="@{!isWebinarOver}"
+            app:layout_constraintEnd_toStartOf="@id/secondsLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/hoursLayout"
+            app:layout_constraintTop_toBottomOf="@id/price"
+            app:type="@{`Minutes`}" />
+
+        <include
+            android:id="@+id/secondsLayout"
+            layout="@layout/time_view"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:data="@{duration.seconds}"
+            app:isLayoutAvailable="@{!isWebinarOver}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/minutesLayout"
+            app:layout_constraintTop_toBottomOf="@id/price"
+            app:type="@{`Seconds`}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addToCartButton"
+            style="@style/AppTheme.CartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="@{addToCartClickListener}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/addToBookmarkButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/secondsLayout"
+            isGone="@{isWebinarOver}"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addToBookmarkButton"
+            style="@style/AppTheme.BookmarkButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="@{addToBookmarkClickListener}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/addToCartButton"
+            app:layout_constraintTop_toBottomOf="@id/secondsLayout"
+            isGone="@{isWebinarOver}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

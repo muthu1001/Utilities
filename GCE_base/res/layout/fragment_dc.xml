@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.serbadk.gceclub.views.detail.academy.DcViewModel" />
+
+        <variable
+            name="addToCartClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="bookmarkClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="authorClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.detail.academy.CcFragment">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                tools:visibility="gone"
+                shimmerIsShow="@{viewmodel.isProductLoading}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/product_detail_loading_view" />
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.core.widget.NestedScrollView
+                isGone="@{viewmodel.isProductLoading}"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/endGuideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="20dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/startGuideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="20dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        loadImage="@{viewmodel.product.getImageUrl()}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/file_big_image"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/dumy_img" />
+
+                    <TextView
+                        android:id="@+id/titleView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@{viewmodel.product.contentTitle}"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        tools:text="@string/dummyContent" />
+
+                    <TextView
+                        android:id="@+id/dateView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/ic_clock"
+                        android:gravity="center"
+                        app:formattedTime="@{viewmodel.product.createdDateTime}"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/titleView"
+                        tools:text="16 November 2018" />
+
+                    <TextView
+                        android:id="@+id/ownerView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/ic_person_grey_24dp"
+                        android:gravity="center"
+                        android:onClick="@{authorClickListener}"
+                        android:text="@{viewmodel.product.authorName}"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@id/dateView"
+                        app:layout_constraintTop_toBottomOf="@id/titleView"
+                        tools:text="Sangeetha" />
+
+                    <com.willy.ratingbar.BaseRatingBar
+                        android:id="@+id/ratingView"
+                        setRating="@{viewmodel.product.avgRating}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/dateView"
+                        app:srb_clickable="false"
+                        app:srb_drawableEmpty="@drawable/ic_star_empty"
+                        app:srb_drawableFilled="@drawable/ic_star_fill"
+                        app:srb_isIndicator="true"
+                        app:srb_numStars="5"
+                        app:srb_scrollable="false"
+                        app:srb_starHeight="15dp"
+                        app:srb_starPadding="4dp"
+                        app:srb_starWidth="15dp" />
+
+                    <TextView
+                        android:id="@+id/ratingTextView"
+                        setTextRating="@{viewmodel.product.avgRating}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/ratingView"
+                        app:layout_constraintStart_toEndOf="@id/ratingView"
+                        app:layout_constraintTop_toTopOf="@id/ratingView" />
+
+                    <TextView
+                        android:id="@+id/descriptionView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8sp"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/ratingTextView"
+                        tools:text="@string/dummyContentLarge" />
+
+                    <TextView
+                        android:id="@+id/includeTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:text="Includes"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/descriptionView" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/includesList"
+                        android:layout_marginTop="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/includeTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lectureList"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/includesList"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/priceView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/lectureList"
+                        tools:text="Free or RM 40.00" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/addToCartButton"
+                        style="@style/AppTheme.CartButton"
+                        isGone="@{viewmodel.isAuthorAndUserSame()}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:onClick="@{addToCartClickListener}"
+                        app:layout_constraintEnd_toStartOf="@id/bookmarkButton"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/priceView" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bookmarkButton"
+                        style="@style/AppTheme.BookmarkButton"
+                        isGone="@{viewmodel.isAuthorAndUserSame()}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:onClick="@{bookmarkClickListener}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@id/addToCartButton"
+                        app:layout_constraintTop_toBottomOf="@id/priceView" />
+
+                    <include
+                        android:id="@+id/editorChoiceLayout"
+                        layout="@layout/product_horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:isLayoutLoading="@{viewmodel.isEditorChoiceLoading()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/bookmarkButton"
+                        app:titleString='@{"Editor Choice"}' />
+
+                    <include
+                        android:id="@+id/reviewLayout"
+                        layout="@layout/review_mini"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:isLayoutLoading="@{viewmodel.isReviewsLoading()}"
+                        app:isReviewAvailable="@{viewmodel.hasReviews}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/editorChoiceLayout"
+                        app:reviewCount="@{viewmodel.totalReviewCount}" />
+
+                    <include
+                        android:id="@+id/similarProductsLayout"
+                        layout="@layout/product_horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:isLayoutLoading="@{viewmodel.isSimilarProductsLoading()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/reviewLayout"
+                        app:titleString="@{`Similar ` + viewmodel.product.contentType.name}" />
+
+                    <include
+                        android:id="@+id/relatedProductsLayout"
+                        layout="@layout/product_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:isLayoutLoading="@{viewmodel.isRelatedProductsLoading()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/similarProductsLayout"
+                        app:titleString="@{`Related Content`}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

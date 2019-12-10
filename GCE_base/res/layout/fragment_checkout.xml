@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.serbadk.gceclub.views.cart.CartViewModel" />
+
+        <variable
+            name="backClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="confirmClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context=".views.cart.CartFragment">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="20dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/divider"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                isShow="@{viewModel.isDataLoading()}"
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/colorPrimary"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="46dp"
+                android:layout_height="46dp" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/view_shadow_elevation_up"
+                app:layout_constraintBottom_toTopOf="@id/priceDetailsView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/priceDetailsView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Price Details"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/priceLeftView"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+            <TextView
+                android:id="@+id/priceLeftView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{`Price (` + viewModel.cartItems.size() + ` Items)`}"
+                tools:text="Price (6 Items)"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/taxLeftView"
+                app:layout_constraintEnd_toStartOf="@id/priceView"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+            <TextView
+                android:id="@+id/priceView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text="@{viewModel.priceDetails.subTotalInString}"
+                app:layout_constraintBottom_toTopOf="@id/taxView"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                tools:text="RM 170.0" />
+
+            <TextView
+                android:id="@+id/taxLeftView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:text="Tax 0%"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/amountPayableLeftView"
+                app:layout_constraintEnd_toStartOf="@id/taxView"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+            <TextView
+                android:id="@+id/taxView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text="@{viewModel.priceDetails.tax}"
+                app:layout_constraintBottom_toTopOf="@id/amountPayableView"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                tools:text="RM 0.0" />
+
+            <TextView
+                android:id="@+id/amountPayableLeftView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Amount Payable"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/shadow"
+                app:layout_constraintEnd_toStartOf="@id/amountPayableView"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+            <TextView
+                android:id="@+id/amountPayableView"
+                tools:text="RM 170.0"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="@{viewModel.priceDetails.orderTotalInString}"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@id/shadow"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/shadow"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/view_shadow_elevation_up"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/backButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/backButton"
+                style="@style/AppTheme.DefaultOutlineButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Back"
+                isGone="@{viewModel.isCartItemsEmpty()}"
+                android:onClick="@{backClickListener}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/confirmButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/confirmButton"
+                style="@style/AppTheme.DefaultButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Confirm"
+                isGone="@{viewModel.isCartItemsEmpty()}"
+                android:enabled="@{!viewModel.isDataLoading()}"
+                android:onClick="@{confirmClickListener}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/backButton" />
+
+            <TextView
+                android:id="@+id/emptyCartView"
+                tools:visibility="gone"
+                android:text="Your shopping cart is empty"
+                android:textSize="24sp"
+                android:gravity="center"
+                isShow="@{viewModel.isCartItemsEmpty()}"
+                android:background="@android:color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

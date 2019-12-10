@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.serbadk.gceclub.views.settings.DashboardViewModel" />
+
+        <variable
+            name="saveClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/widgetcoordinateLay">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    isShow="@{viewmodel.isToShowProgressBar()}"
+                    android:indeterminate="true"
+                    android:indeterminateTintMode="src_atop"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/myPurchasesSwitch"
+                    android:text="@string/my_purchases"
+                    android:textSize="18sp"
+                    android:layout_marginTop="12dp"
+                    android:theme="@style/AppTheme.SwitchTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewmodel.dashboardWidgetItems.myPurchase}" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/myProductsSwitch"
+                    android:text="@string/my_products"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:theme="@style/AppTheme.SwitchTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewmodel.dashboardWidgetItems.myProducts}" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/totalProfitSwitch"
+                    android:text="@string/total_profit"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:theme="@style/AppTheme.SwitchTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewmodel.dashboardWidgetItems.totalProfit}" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/followersSwitch"
+                    android:text="@string/followers"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:theme="@style/AppTheme.SwitchTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewmodel.dashboardWidgetItems.followers}" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/thisWeekSalesSwitch"
+                    android:text="@string/this_week_sale"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:theme="@style/AppTheme.SwitchTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewmodel.dashboardWidgetItems.thisWeekSales}" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/thisWeekPurchasesSwitch"
+                    android:text="@string/this_week_purchase"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:theme="@style/AppTheme.SwitchTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewmodel.dashboardWidgetItems.thisWeekDownloads}" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/reportedCountSwitch"
+                    android:text="@string/reported_count"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:theme="@style/AppTheme.SwitchTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewmodel.dashboardWidgetItems.reportedProductCount}" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/saveButton"
+                    style="@style/AppTheme.AccountButton"
+                    android:text="Save"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{saveClickListener}" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

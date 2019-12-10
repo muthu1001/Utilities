@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+<data>
+    <variable name="foldersProductViewModel" type="com.serbadk.gceclub.views.creatorPage.creatorPlaylist.CreatorPlaylistFolderProductViewModel"/>
+</data>
+
+    <RelativeLayout
+            android:id="@+id/creatorPlaylistFolderItemListLay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/creatorPlaylistFolderItemList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_4dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/playlist_folder_product_item" />
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                android:indeterminate="true"
+                android:layout_centerInParent="true"
+                isShow="@{foldersProductViewModel.networkState.isInitial()}"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        <TextView
+                android:id="@+id/errorView"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/size_16dp"
+                android:visibility="gone"
+                android:text="Sorry, Creator's playlist folder is empty!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="qaViewmodel"
+            type="com.serbadk.gceclub.views.settings.purchases.course.exam.ExamViewModel" />
+
+        <variable
+            name="startFinalExamClickListener"
+            type="android.view.View.OnClickListener" />
+        <variable
+            name="back2courseListener"
+            type="android.view.View.OnClickListener" />
+        <variable
+            name="submitClickListener"
+            type="android.view.View.OnClickListener" />
+        <variable
+            name="resetClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/instructionLayout">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                isShow="@{qaViewmodel.isToShowProgressBarInstruction()}"
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/colorPrimary" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            isGone="@{qaViewmodel.isToShowProgressBarInstruction()}"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/back2courseBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/textView2"
+                android:text="@{`Instruction \n`+`Please follow the below instructions: \n`+qaViewmodel.finalExamInstruction}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="this is instructionText this is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionTextthis is instructionText" />
+            </ScrollView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/startFinalExamBtn"
+                style="@style/AppTheme.DefaultButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:onClick="@{startFinalExamClickListener}"
+                android:text="Start"
+                android:textAllCaps="false"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/back2courseBtn"
+                style="@style/AppTheme.DefaultOutlineButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="12dp"
+                android:onClick="@{back2courseListener}"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/startFinalExamBtn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/qALayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                isShow="@{qaViewmodel.isToShowProgressBar()}"
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/colorPrimary" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nesScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                isGone="@{qaViewmodel.isToShowProgressBar()}"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ans_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/checkans_txt"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="Check Answer Q &amp; A"
+                            android:textStyle="bold"
+                            android:layout_margin="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/no_of_qn"
+                            android:layout_margin="10dp"
+                            android:text="Total No of Questions"
+                            app:layout_constraintTop_toBottomOf="@id/checkans_txt"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/colon1"
+                            android:text=":"
+                            android:layout_margin="10dp"
+                            app:layout_constraintTop_toBottomOf="@+id/checkans_txt"
+                            app:layout_constraintStart_toEndOf="@id/no_of_qn" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/no_of_qn_value"
+                            android:text="5"
+                            android:layout_margin="10dp"
+                            app:layout_constraintTop_toBottomOf="@+id/checkans_txt"
+                            app:layout_constraintStart_toEndOf="@id/colon1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/no_of_ans"
+                            android:text="Total No of Correct Answers"
+                            app:layout_constraintTop_toBottomOf="@+id/no_of_qn"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_margin="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/colon_2"
+                            android:text=":"
+                            app:layout_constraintTop_toBottomOf="@+id/colon1"
+                            app:layout_constraintStart_toEndOf="@id/no_of_ans"
+                            android:layout_margin="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/no_of_ans_value"
+                            android:text="4"
+                            app:layout_constraintTop_toBottomOf="@+id/no_of_qn_value"
+                            app:layout_constraintStart_toEndOf="@id/colon_2"
+                            android:layout_margin="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/percntage_earned_txt"
+                            android:text="Percentage Earned"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/no_of_ans"
+                            android:layout_margin="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/colon_3"
+                            android:text=":"
+                            app:layout_constraintStart_toEndOf="@id/percntage_earned_txt"
+                            app:layout_constraintTop_toBottomOf="@id/colon_2"
+                            android:layout_margin="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/percentage_earned_value"
+                            android:text="80%"
+                            app:layout_constraintStart_toEndOf="@id/colon_3"
+                            app:layout_constraintTop_toBottomOf="@id/no_of_ans_value"
+                            android:layout_margin="10dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:id="@+id/dividerView"
+                            android:background="@color/colorTransBlack2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/percntage_earned_txt"
+                            android:layout_margin="10dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <FrameLayout
+                        android:id="@+id/frameLay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toBottomOf="@id/ans_lay">
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/qnAnsList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="true"
+                            android:overScrollMode="never"
+                            android:paddingBottom="10dp"
+                            android:clipToPadding="false"
+                            android:scrollbarStyle="outsideOverlay"
+                            android:paddingTop="8dp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:spanCount="2"
+                            tools:listitem="@layout/list_qn_an_item"
+                            tools:spanCount="2" />
+
+                        <TextView
+                            android:id="@+id/errorView"
+                            android:visibility="gone"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Sorry, No Products Found!"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </FrameLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/submitBtn"
+                        style="@style/AppTheme.DefaultButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="15dp"
+                        android:onClick="@{submitClickListener}"
+                        android:text="Submit"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/resetBtn"
+                        app:layout_constraintTop_toBottomOf="@id/frameLay"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/resetBtn"
+                        style="@style/AppTheme.DefaultOutlineButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="15dp"
+                        android:onClick="@{resetClickListener}"
+                        android:text="Reset"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/submitBtn"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/frameLay"
+                        app:layout_constraintVertical_bias="0.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.serbadk.gceclub.views.settings.AppInfoFragment">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/termsAndCondition"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:text="Terms &amp; Conditions"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/privacyPolicy"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:text="Privacy Policy"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/legal"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:text="Legal"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/licencing"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:text="Licensing"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/aboutGce"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:text="About GCE"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/faq"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:text="FAQ"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/contactUs"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:text="Contact Us"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

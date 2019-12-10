@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="alert"
+            type="com.serbadk.gceclub.model.Alert" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/background_corned"
+        android:backgroundTint="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_marginTop="21dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="@{alert.title}"
+            tools:text="This is title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/descriptionView"
+            android:layout_marginTop="8dp"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:textStyle="normal"
+            android:text="@{alert.message}"
+            tools:text="This is description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="@color/loadingGrey2"
+            app:boxStrokeWidth="0.5dp"
+            app:hintTextColor="@android:color/holo_red_dark"
+            android:background="@android:color/white"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText"
+                android:background="@null"
+                android:hint="Reason"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:inputType="textMultiLine"
+                android:maxLines="4"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:minHeight="?attr/actionBarSize"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/negativeButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Negative"
+                android:text="@{alert.negativeText}"
+                android:onClick="@{alert.negativeOnClickListener}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/positiveButton"
+                style="@style/Widget.MaterialComponents.Button"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Positive"
+                android:text="@{alert.positiveText}"
+                android:onClick="@{alert.positiveOnClickListener}"
+                android:layout_marginStart="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

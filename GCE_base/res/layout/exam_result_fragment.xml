@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="successMessage"
+            type="String" />
+    </data>
+    <ScrollView xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".views.settings.purchases.course.exam.ExamResultFragment"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Result"
+        android:paddingBottom="@dimen/size_12dp"
+        android:paddingTop="@dimen/size_12dp"
+        android:id="@+id/resultTxt"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/resultTxt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Your Score"
+        android:paddingBottom="@dimen/size_16dp"
+        android:id="@+id/urScoreTxt"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="28sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/size_12dp"
+        app:layout_constraintTop_toBottomOf="@+id/urScoreTxt"
+        android:id="@+id/scoreViewLay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+    <com.hookedonplay.decoviewlib.DecoView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/scoreView"
+        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{successMessage}"
+            android:foregroundGravity="top"
+            tools:text="85%"
+            android:id="@+id/resultPercentageTxt"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="42sp"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/scoreViewLay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@{successMessage}"
+        tools:text="super appu!!"
+        android:id="@+id/successTxt"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="24sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/successTxt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text=""
+        tools:text="super appu!!"
+        android:id="@+id/percentTxt"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="24sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.serbadk.gceclub.views.settings.purchases.webinar.WebinarPurchasedViewModel" />
+        <variable
+            name="viewWebinarClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.settings.purchases.webinar.WebinarPurchaseFragment">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/file_big_image"
+            loadImage="@{viewmodel.purchasedWebinar.trainingDetail.imageUrl}"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/dumy_img" />
+
+        <!--<TextView
+            android:id="@+id/titleView"
+            android:text="@{viewmodel.purchasedWebinar.trainingDetail.trainingTitle}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/imageView"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/viewWebinarButton"
+            android:text="View Webinar"
+            android:textAllCaps="false"
+            app:backgroundTint="#28a745"
+            android:visibility="gone"
+            android:onClick="@{viewWebinarClickListener}"
+            app:layout_constraintStart_toStartOf="@id/imageView"
+            app:layout_constraintEnd_toEndOf="@id/imageView"
+            app:layout_constraintTop_toTopOf="@id/imageView"
+            app:layout_constraintBottom_toBottomOf="@id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:minHeight="?actionBarSize"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/MyCustomTabTextAppearance"
+            app:tabBackground="@android:color/black"
+            app:tabTextColor="@android:color/white"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabMaxWidth="0dp"
+            app:tabIndicatorFullWidth="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="backClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.search.SearchFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:background="@android:color/white"
+            android:translationZ="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:onClick="@{backClickListener}"
+                    app:srcCompat="@drawable/ic_arrow_back"
+                    android:background="@android:color/white"
+                    android:layout_width="@dimen/a11y_min_touch_target"
+                    android:layout_height="match_parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    android:layout_weight="1"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxBackgroundMode="none"
+                    android:background="@android:color/white"
+                    app:hintAnimationEnabled="false"
+                    app:hintEnabled="false"
+                    app:errorEnabled="false"
+                    app:errorIconDrawable="@null"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_search"
+                    android:layout_width="0dp"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/editText"
+                        android:hint="@string/search_text"
+                        android:completionThreshold="1"
+                        android:textColor="@android:color/black"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:imeOptions="actionSearch"
+                        android:background="@null"
+                        android:padding="8dp"
+                        android:gravity="center_vertical"
+                        android:textSize="18sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp"
+                android:paddingBottom="100dp"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideOverlay"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/list_product"
+                tools:spanCount="2" />
+
+            <TextView
+                android:id="@+id/errorView"
+                android:visibility="gone"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="Filtered Content Not Available!"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/initialView"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:gravity="center_horizontal"
+                android:paddingTop="100dp"
+                android:background="@android:color/white"
+                android:text="Search for Content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/filterFab"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal"
+            app:rippleColor="@android:color/black"
+            app:srcCompat="@drawable/ic_filter"
+            app:tint="@android:color/white" />
+
+        <fragment
+            android:id="@+id/filterSheet"
+            android:name="com.serbadk.gceclub.views.search.SearchFilterSheetFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size_4dp"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:behavior_skipCollapsed="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            tools:layout="@layout/fragment_product_filter_sheet" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

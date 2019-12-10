@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.serbadk.gceclub.views.settings.purchases.webinar.WebinarPurchasedViewModel" />
+
+        <variable
+            name="sendClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/labelView"
+            isShow="@{viewmodel.isWebinarStarted}"
+            tools:text="Webinar will start at some time"
+            android:textSize="20sp"
+            android:gravity="center"
+            tools:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".views.settings.purchases.webinar.ChatFragment">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                isShow="@{viewmodel.isChatLoading()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/participantsText"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:text="Participants / Members"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/participantsRecyclerView"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/participantsText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/conversationsText"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:text="Conversations"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/participantsRecyclerView"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/conversationsText"
+                app:layout_constraintBottom_toTopOf="@id/dividerView"
+                android:layout_marginTop="4dp"
+                android:paddingBottom="20dp"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideOverlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+            <View
+                android:id="@+id/dividerView"
+                android:background="@android:color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:padding="4dp"
+                android:background="@color/loadingGrey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_weight="1"
+                    android:hint="Type a message"
+                    android:layout_marginStart="4dp"
+                    android:inputType="textImeMultiLine"
+                    android:background="@android:color/white"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="4"
+                    android:minHeight="@dimen/a11y_min_touch_target"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/sendButton"
+                    android:visibility="gone"
+                    android:layout_width="@dimen/a11y_min_touch_target"
+                    android:layout_height="@dimen/a11y_min_touch_target"
+                    android:background="@null"
+                    android:onClick="@{sendClickListener}"
+                    app:srcCompat="@drawable/ic_send" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.serbadk.gceclub.model.StatusPanel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/size_6dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardElevation="8dp"
+        android:layout_marginBottom="4dp"
+        app:strokeColor="@color/darkGrey"
+        android:minHeight="75dp"
+        android:minWidth="75dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/itemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minLines="2"
+                android:layout_gravity="center|center_horizontal"
+                android:text="@{item.statusName}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="My Purchase" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="36dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="36dp"
+                android:layout_marginTop="12dp"
+                app:srcCompat="@drawable/ic_fax" />
+
+            <TextView
+                android:id="@+id/itemCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center_horizontal"
+                tools:text="15"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+        </LinearLayout>
+        
+    </com.google.android.material.card.MaterialCardView>
+</layout>

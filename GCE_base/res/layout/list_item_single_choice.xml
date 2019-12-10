@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="38dp"
+    android:orientation="horizontal"
+    android:paddingEnd="12dip"
+    android:paddingStart="12dip"
+    android:weightSum="1">
+
+    <RadioButton
+        android:id="@+id/radio_button"
+        android:layout_width="35dip"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:paddingEnd="4dp"
+        android:paddingStart="8dp"
+        android:singleLine="true"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="?attr/textColorAlertDialogListItem"
+        android:textSize="14sp"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:id="@+id/tail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="@tools:sample/lorem" />
+
+</LinearLayout>

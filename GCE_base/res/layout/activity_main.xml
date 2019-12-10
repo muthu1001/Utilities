@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.main.MainActivity"
+        tools:ignore="ContentDescription">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolBar"
+                android:theme="@style/AppTheme.Toolbar"
+                android:background="@color/gceBlueBlack"
+                app:titleTextColor="@color/colorPrimary"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:titleTextAppearance="@style/AppTheme.ActionBar.Title"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <ImageView
+                    android:id="@+id/logoImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:adjustViewBounds="true"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/app_logo_svg" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <fragment
+            android:id="@+id/navHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            android:layout_weight="1"
+            app:navGraph="@navigation/navigation_graph" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavView"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/gceBlueBlack"
+            app:labelVisibilityMode="unlabeled"
+            app:itemIconTint="@drawable/bottom_navigation_colors"
+            app:menu="@menu/nav_menu" />
+
+    </LinearLayout>
+
+</layout>
+

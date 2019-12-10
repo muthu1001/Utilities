@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.serbadk.gceclub.views.settings.purchases.PurchaseViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".views.settings.purchases.PurchaseFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false"
+                app:endIconMode="custom"
+                app:boxBackgroundColor="@android:color/white"
+                app:endIconDrawable="@drawable/ic_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText"
+                    android:hint="@string/search_text"
+                    android:textColor="@android:color/black"
+                    android:imeOptions="actionSearch"
+                    android:textSize="18sp"
+                    android:inputType="text"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    app:singleLine="true"
+                    app:singleSelection="true"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="8dp"
+                    app:checkedChip="@id/allContentChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/allContentChip"
+                        android:text="All Content"
+                        android:clickable="false"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/videoChip"
+                        android:text="Video"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/audioChip"
+                        android:text="Audio"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/textChip"
+                        android:text="Text"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/photosChip"
+                        android:text="Photos"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/certificateCoursesChip"
+                        android:text="Certificate Course"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/diplomaCoursesChip"
+                        android:text="Diploma Course"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/webinarChip"
+                        android:text="Webinar"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/eventsChip"
+                        android:text="Events"
+                        style="@style/AppTheme.MyPurchasesChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                isGone="@{viewModel.isPurchasedProductsLoading()}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/item_purchased_product"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontalScrollView"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/noFilterView"
+                android:text="No product on this filter"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:visibility="gone"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="@id/recyclerView"
+                app:layout_constraintEnd_toEndOf="@id/recyclerView"
+                app:layout_constraintTop_toTopOf="@id/recyclerView"
+                app:layout_constraintBottom_toBottomOf="@id/recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                isShow="@{viewModel.isPurchasedProductsLoading()}"
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/recyclerView"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

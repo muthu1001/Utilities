@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="buyTicketClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.common.eventTicket.EventTicketFragment"
+      >
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            app:layout_constraintGuide_percent=".40"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/horizontal_guide_1"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            app:layout_constraintGuide_percent=".60"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/horizontal_guide_2"/>
+        <TextView
+            android:id="@+id/ticketType_saleEndDt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/size_12dp"
+            android:paddingBottom="@dimen/size_12dp"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_4dp"
+            android:text="Ticket Name"
+            style="@android:style/TextAppearance.Medium"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toStartOf="@+id/horizontal_guide_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Premium Ticket" />
+
+        <TextView
+            android:id="@+id/availableTicket_price"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/size_4dp"
+            android:text="Price"
+            android:textStyle="bold"
+            android:gravity="start|center_vertical"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/ticketType_saleEndDt"
+            app:layout_constraintLeft_toRightOf="@+id/horizontal_guide_1"
+            app:layout_constraintRight_toLeftOf="@+id/horizontal_guide_2"
+            app:layout_constraintTop_toTopOf="@+id/ticketType_saleEndDt"
+            tools:text="R.M 1.00" />
+
+        <TextView
+            android:id="@+id/quantityView"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:paddingTop="@dimen/size_4dp"
+            android:paddingBottom="@dimen/size_4dp"
+            android:paddingStart="@dimen/size_4dp"
+            android:paddingEnd="@dimen/size_16dp"
+            android:text="Quantity"
+            android:textStyle="bold"
+            android:gravity="center|end"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/ticketType_saleEndDt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/horizontal_guide_2"
+            app:layout_constraintTop_toTopOf="@+id/ticketType_saleEndDt" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ticketType_saleEndDt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/buyTicketsButton"
+            tools:listitem="@layout/evet_ticket_item"
+            tools:itemCount="10"
+            android:id="@+id/availableTicketList"
+        />
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buy"
+            android:onClick="@{buyTicketClickListener}"
+            android:id="@+id/buyTicketsButton"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/availableTicketList"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

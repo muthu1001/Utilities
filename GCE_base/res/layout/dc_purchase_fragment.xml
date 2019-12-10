@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.serbadk.gceclub.views.settings.purchases.course.DcPurchaseViewModel" />
+
+        <variable
+            name="certifiedClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="tryAgainClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="takeAssignmentClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="pdfClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="editClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="deleteClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="viewSampleCertificateClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.settings.purchases.course.CcPurchaseFragment">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                tools:visibility="gone"
+                shimmerIsShow="@{viewmodel.isLoading()}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/product_detail_loading_view" />
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.core.widget.NestedScrollView
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/endGuideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="20dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/startGuideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="20dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="0dp"
+                        loadImage="@{viewmodel.trainingDetail.imageUrl}"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/file_big_image"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/dumy_img" />
+
+                    <TextView
+                        android:id="@+id/titleView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:text="@{viewmodel.trainingDetail.trainingTitle}"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        tools:text="@string/dummyContent" />
+
+                    <TextView
+                        android:id="@+id/descriptionView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8sp"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/titleView"
+                        tools:text="@string/dummyContentLarge" />
+
+                    <TextView
+                        android:id="@+id/timeRemainingView"
+                        android:layout_marginTop="16dp"
+                        android:text="@{viewmodel.courseDuration.second}"
+                        tools:text="6 days to complete the course"
+                        android:drawableStart="@drawable/ic_timer"
+                        android:textColor="@android:color/black"
+                        android:drawablePadding="8dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/descriptionView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/includeTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:text="Includes"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/timeRemainingView" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/includesList"
+                        android:layout_marginTop="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"
+                        tools:listitem="@layout/list_include_layout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/includeTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/lecturesTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:text="Details"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/includesList" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lectureList"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lecturesTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/highlightsTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:text="Highlights"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/lectureList" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/highlightList"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/highlightsTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/noHighlightsView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        tools:visibility="gone"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:text="No Highlights Available."
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/highlightList" />
+
+                    <TextView
+                        android:id="@+id/assignmentTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:text="Assignment"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/noHighlightsView" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/takeAssignmentButton"
+                        android:text="@{viewmodel.courseDuration.first ? `Take Assignment` : `Assignment`}"
+                        android:textAllCaps="false"
+                        tools:text="Take Assignment"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:onClick="@{viewmodel.courseDuration.first ? takeAssignmentClickListener : null}"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/assignmentTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageButton
+                        android:id="@+id/deleteButton"
+                        app:srcCompat="@drawable/ic_delete"
+                        android:scaleType="centerCrop"
+                        android:onClick="@{deleteClickListener}"
+                        isShow="@{viewmodel.trainingDetail.isUserAssignmentAvailable()}"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintTop_toTopOf="@id/takeAssignmentButton"
+                        app:layout_constraintBottom_toBottomOf="@id/takeAssignmentButton"
+                        android:layout_width="@dimen/a11y_min_touch_target"
+                        android:layout_height="@dimen/a11y_min_touch_target" />
+
+                    <ImageButton
+                        android:id="@+id/editButton"
+                        app:srcCompat="@drawable/ic_edit"
+                        android:scaleType="centerCrop"
+                        android:onClick="@{editClickListener}"
+                        isShow="@{viewmodel.trainingDetail.isUserAssignmentAvailable()}"
+                        app:layout_constraintTop_toTopOf="@id/takeAssignmentButton"
+                        app:layout_constraintEnd_toStartOf="@id/deleteButton"
+                        app:layout_constraintBottom_toBottomOf="@id/takeAssignmentButton"
+                        android:layout_width="@dimen/a11y_min_touch_target"
+                        android:layout_height="@dimen/a11y_min_touch_target" />
+
+                    <ImageButton
+                        android:id="@+id/pdfButton"
+                        app:srcCompat="@drawable/ic_pdf"
+                        android:scaleType="centerCrop"
+                        android:onClick="@{pdfClickListener}"
+                        isShow="@{viewmodel.trainingDetail.isUserAssignmentAvailable()}"
+                        app:layout_constraintTop_toTopOf="@id/takeAssignmentButton"
+                        app:layout_constraintEnd_toStartOf="@id/editButton"
+                        app:layout_constraintBottom_toBottomOf="@id/takeAssignmentButton"
+                        android:layout_width="@dimen/a11y_min_touch_target"
+                        android:layout_height="@dimen/a11y_min_touch_target" />
+                    <TextView
+                        android:id="@+id/finalExamTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:text="Final Exam"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/pdfButton" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/certifiedButton"
+                        android:text="Certified"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        app:icon="@drawable/ic_eye"
+                        android:onClick="@{certifiedClickListener}"
+                        app:layout_constraintStart_toStartOf="@id/startGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/finalExamTextView"
+                        app:layout_constraintBottom_toTopOf="@+id/sapmleCertificateButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/tryAgainButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:onClick="@{tryAgainClickListener}"
+                        android:text="Try again"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toTopOf="@+id/sapmleCertificateButton"
+                        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                        app:layout_constraintTop_toTopOf="@+id/certifiedButton" />
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sapmleCertificateButton"
+                        android:visibility="gone"
+                        android:onClick="@{viewSampleCertificateClickListener}"
+                        android:text="view sample certificate"
+                        android:textColor="@color/gceBlue"
+                        android:layout_marginBottom="@dimen/size_8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

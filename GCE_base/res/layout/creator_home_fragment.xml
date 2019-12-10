@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            isShow="@{creatorHomeViewModel.isHomeLoading()}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminate="true" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nesScrollView"
+            isGone="@{creatorHomeViewModel.isHomeLoading()}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
+                tools:context=".views.creatorPage.home.CreatorHomeFragment">
+
+                <FrameLayout
+                    android:id="@+id/creatorImagesHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:foreground="@drawable/playlist_folder_background">
+                    <ImageView
+                        android:id="@+id/coverImage"
+                        loadImage="@{creatorHomeViewModel.creator.getCoverImageUrl()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/file_big_image"
+                        android:scaleType="fitXY"
+                        tools:src="@drawable/dumy_img" />
+                </FrameLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/profileImage"
+                            loadRoundImage="@{creatorHomeViewModel.creator.getProfileImageUrl()}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/file_big_image"
+                            android:scaleType="centerInside"
+                            tools:src="@drawable/dumy_img" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/size_8dp"
+                            android:text="@{creatorHomeViewModel.creator.name}"
+                            android:textColor="@android:color/white"
+                            android:textColorHighlight="@color/colorTransBlack2"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:text="author name" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_location"
+                            android:drawableTint="@color/loadingGrey1"
+                            android:paddingBottom="@dimen/size_8dp"
+                            android:paddingLeft="@dimen/size_16dp"
+                            android:paddingRight="@dimen/size_8dp"
+                            android:paddingTop="@dimen/size_8dp"
+                            android:text="@{creatorHomeViewModel.creator.billingInfo.city+`,`+ creatorHomeViewModel.creator.billingInfo.countryName}"
+                            android:textColor="@android:color/white"
+                            tools:text="chennai" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/followButton"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:onClick="@{followClickListener}"
+                            android:text="Follow"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="@+id/recentUploadsTitle"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/authorDescText" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:nestedScrollingEnabled="true"
+                    app:layout_constraintTop_toBottomOf="@+id/recentUploadsTitle">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/productList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clipToPadding="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingTop="8dp"
+                        android:scrollbarStyle="outsideOverlay"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2"
+                        tools:deviceSpanCount="2"
+                        tools:listitem="@layout/list_product" />
+
+                    <TextView
+                        android:id="@+id/errorView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Sorry, No Products Found!"
+                        android:textColor="@android:color/black"
+                        android:textSize="24sp"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/linksLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAppDark"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/size_8dp"
+                    android:paddingTop="@dimen/size_8dp"
+                    isShow="@{creatorHomeViewModel.websiteLinkAvailable||creatorHomeViewModel.facebookLinkAvailable||creatorHomeViewModel.linkedInLinkAvailable||creatorHomeViewModel.twitterLinkAvailable}"
+                    app:layout_constraintTop_toBottomOf="@+id/creatorImagesHolder">
+
+                    <ImageButton
+                        android:id="@+id/website_link"
+                        isShow="@{creatorHomeViewModel.websiteLinkAvailable}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{linksClickListener}"
+                        android:paddingLeft="@dimen/size_16dp"
+                        android:paddingRight="@dimen/size_16dp"
+                        app:srcCompat="@drawable/ic_website_link" />
+
+                    <ImageButton
+                        android:id="@+id/twitter_link"
+                        isShow="@{creatorHomeViewModel.twitterLinkAvailable}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{linksClickListener}"
+                        android:paddingLeft="@dimen/size_16dp"
+                        android:paddingRight="@dimen/size_16dp"
+                        app:srcCompat="@drawable/ic_twitter_link" />
+
+                    <ImageButton
+                        android:id="@+id/facebook_link"
+                        isShow="@{creatorHomeViewModel.facebookLinkAvailable}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{linksClickListener}"
+                        android:paddingLeft="@dimen/size_16dp"
+                        android:paddingRight="@dimen/size_16dp"
+                        app:srcCompat="@drawable/ic_facebook_link" />
+
+                    <ImageButton
+                        android:id="@+id/linkedin_link"
+                        isShow="@{creatorHomeViewModel.linkedInLinkAvailable}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{linksClickListener}"
+                        android:paddingLeft="@dimen/size_16dp"
+                        android:paddingRight="@dimen/size_16dp"
+                        app:srcCompat="@drawable/ic_linkedin_link" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/authorDescText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/recentUploadsTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linksLay"
+                    tools:text="@string/dummyContent" />
+
+                <TextView
+                    android:id="@+id/recentUploadsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="Recent Uploads"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    app:layout_constraintEnd_toStartOf="@+id/seeAllButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/authorDescText" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/seeAllButton"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{seeAllClickListener}"
+                    android:text="See All"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/recentUploadsTitle"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/recentUploadsTitle" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+
+    <data>
+
+        <variable
+            name="creatorHomeViewModel"
+            type="com.serbadk.gceclub.views.creatorPage.home.CreatorHomeViewModel" />
+
+        <variable
+            name="seeAllClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="linksClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="followClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+</layout>

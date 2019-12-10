@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="playListBookmarkFolder"
+            type="com.serbadk.gceclub.model.PlaylistBookmarkFolder"/>
+        <variable name="popUpMenuClickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable name="folderSelectListener"
+            type="android.view.View.OnClickListener"/>
+        <variable name="isSelectOnly" type="Boolean"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{folderSelectListener}"
+        android:paddingBottom="@dimen/size_8dp"
+        android:paddingLeft="@dimen/size_4dp"
+        android:paddingRight="@dimen/size_4dp"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/folderImageLay"
+            android:foreground="@drawable/playlist_folder_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:src="@drawable/dumy_img"
+                loadImage="@{playListBookmarkFolder.getImageUrl()}"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+        <TextView
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="playlist folder name"
+            android:text="@{playListBookmarkFolder.folderName}"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginStart="@dimen/size_8dp"
+            android:layout_marginEnd="@dimen/size_8dp"
+            />
+
+        <TextView
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/menuDotsButton"
+            app:layout_constraintBottom_toBottomOf="@+id/folderImageLay"
+            tools:text="3 items"
+            android:text="@{playListBookmarkFolder.count+` items`}"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginStart="@dimen/size_8dp"
+            android:layout_marginEnd="@dimen/size_8dp"
+            android:layout_marginBottom="@dimen/size_8dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/menuDotsButton"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{popUpMenuClickListener}"
+            app:srcCompat="@drawable/ic_menu_dots"
+            android:tint="@android:color/white"
+            isGone="@{isSelectOnly}"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_marginBottom="@dimen/size_12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

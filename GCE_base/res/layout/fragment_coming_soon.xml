@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/coming_soon"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+    >
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/app_logo"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="We're Coming Soon!"
+              android:textSize="20sp"
+              android:layout_marginTop="@dimen/size_12dp"
+              android:textColor="@android:color/holo_orange_light"
+    />
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="16sp"
+              android:gravity="center"
+              android:layout_marginTop="@dimen/size_12dp"
+              android:text="Perfect and awesome \n product will be available soon. \nHooking audience attention is all in the opener."
+              android:textColor="@android:color/white" />
+    </LinearLayout>
+</RelativeLayout>

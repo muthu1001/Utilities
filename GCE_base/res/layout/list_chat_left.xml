@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="chat"
+            type="com.serbadk.gceclub.model.Chat" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_end="12dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toTopOf="parent"
+            loadRoundImage="@{chat.imageUrl}"
+            app:srcCompat="@drawable/ic_account" />
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:text="@{chat.createdByName}"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="@id/imageView"
+            tools:text="Karthick Ramanathan" />
+
+        <TextView
+            android:id="@+id/timeView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="2dp"
+            android:textSize="12sp"
+            app:agoTime="@{chat.createdDateTime}"
+            app:layout_constraintBottom_toBottomOf="@id/imageView"
+            app:layout_constraintStart_toStartOf="@id/nameView"
+            app:layout_constraintTop_toBottomOf="@id/nameView"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            tools:text="2 days ago" />
+
+        <TextView
+            android:id="@+id/chatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            tools:text="This is message"
+            android:padding="6dp"
+            android:gravity="center"
+            android:text="@{chat.message}"
+            android:background="@drawable/chat_left_shape"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/timeView"
+            app:layout_constraintTop_toBottomOf="@id/timeView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

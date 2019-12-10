@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.serbadk.gceclub.views.detail.exchange.ExchangeDetailViewModel" />
+
+        <variable
+            name="addToCartClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="addToBookmarkClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="authorClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    tools:visibility="gone"
+                    shimmerIsShow="@{viewModel.isProductDetailLoading}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <include layout="@layout/product_detail_loading_view" />
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    isGone="@{viewModel.isProductDetailLoading}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include
+                        android:id="@+id/detailLayout"
+                        layout="@layout/product_detail_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:productDetail="@{viewModel.productDetail}"
+                        app:addToCartClickListener="@{addToCartClickListener}"
+                        app:authorClickListener="@{authorClickListener}"
+                        app:addToBookmarkClickListener="@{addToBookmarkClickListener}" />
+
+                    <include
+                        android:id="@+id/reviewLayout"
+                        layout="@layout/review_mini"
+                        app:reviewCount="@{viewModel.totalProductReviewCount}"
+                        app:isLayoutLoading="@{viewModel.isProductReviewsLoading}"
+                        app:isReviewAvailable="@{viewModel.isReviewsAvailable}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/editorChoiceLayout"
+                        layout="@layout/product_horizontal"
+                        app:isLayoutLoading="@{viewModel.isEditorChoicesLoading}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:titleString='@{"Editor Choice"}' />
+
+                    <include
+                        android:id="@+id/similarProductsLayout"
+                        layout="@layout/product_horizontal"
+                        app:isLayoutLoading="@{viewModel.isSimilarProductsLoading}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:titleString='@{"Similar " + viewModel.productDetail.contentType.name}' />
+
+                    <include
+                        android:id="@+id/relatedProductsLayout"
+                        layout="@layout/product_horizontal"
+                        app:isLayoutLoading="@{viewModel.isRelatedProductsLoading}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:titleString='@{"Related Content"}' />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:indeterminate="true"
+                        isShow="@{viewModel.isToShowProgressBar()}"
+                        android:indeterminateTintMode="src_atop"
+                        android:indeterminateTint="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

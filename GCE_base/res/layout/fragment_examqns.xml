@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="examViewmodel"
+            type="com.serbadk.gceclub.views.settings.purchases.course.exam.ExamViewModel"/>
+        <variable
+            name="submitClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="resetClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nesScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Final Exam"
+                    android:id="@+id/finalExamTitle"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="10dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <FrameLayout
+                    android:id="@+id/frameLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/finalExamTitle">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        isShow="@{examViewmodel.isToShowProgressBar()}"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/qnAnsList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="true"
+                        android:paddingBottom="10dp"
+                        android:clipToPadding="false"
+                        android:scrollbarStyle="outsideOverlay"
+                        android:paddingTop="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:spanCount="2"
+                        tools:listitem="@layout/list_qn_an_item"
+                        tools:spanCount="2" />
+
+                    <TextView
+                        android:id="@+id/errorView"
+                        android:visibility="gone"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:text="Sorry, No Products Found!"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </FrameLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/submitBtn"
+                    style="@style/AppTheme.DefaultButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="15dp"
+                    android:onClick="@{submitClickListener}"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/resetBtn"
+                    app:layout_constraintTop_toBottomOf="@id/frameLay"
+                    app:layout_constraintVertical_bias="0.0"
+                    isGone="@{examViewmodel.isToShowProgressBar()}"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/resetBtn"
+                    style="@style/AppTheme.DefaultOutlineButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="15dp"
+                    android:onClick="@{resetClickListener}"
+                    android:text="Reset"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/submitBtn"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frameLay"
+                    app:layout_constraintVertical_bias="0.0"
+                    isGone="@{examViewmodel.isToShowProgressBar()}"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
